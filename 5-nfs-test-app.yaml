@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jesuswithme-nfs-test
+  labels:
+    app: nginxnfs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginxnfs
+  template:
+    metadata:
+      labels:
+        app: nginxnfs
+    spec:
+      containers:
+      - name: nginxnfs
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:                    
+          - mountPath: /nfs
+            name: nfsvolume          
+      volumes:                           
+      - name: nfsvolume
+        persistentVolumeClaim:           
+          claimName: nfs-pvc-test

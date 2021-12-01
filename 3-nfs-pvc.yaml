@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc-test
+spec:
+  storageClassName: managed-nfs-storage # StorageClass 명
+  accessModes:
+    - ReadWriteMany # 생성될 PV에 적용할 사용 모드
+  resources:
+    requests:
+      storage: 10Mi  # 생성될 PV 크기
